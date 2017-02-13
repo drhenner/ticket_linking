@@ -4,7 +4,7 @@ This is an exercise that will work with an existing API. The Setup and Usage sec
 
 This project is a rudimentary ticketing API. The resources include `Account`, `Ticket` and `User`. Each ticket belongs to an account and a user, and can potentially have a relationship with another ticket. In that case, one ticket is an "incident" of another "problem" ticket. An incident can belong to only one problem ticket and a problem ticket can have many incidents.
 
-This ticket to ticket relationship is currently accomplished using a `problem_id` column on the ticket table. When there are multiple tickets created for the same "problem", setting the `problem_id` on a ticket signifies this is another incident of a problem we are already aware of. If the `prolem_id` is `nil`, that ticket is its own independent ticket that does not represent an incident of another ticket.
+This ticket to ticket relationship is currently accomplished using a `problem_id` column on the ticket table. When there are multiple tickets created for the same "problem", setting the `problem_id` on a ticket signifies this is another incident of a problem we are already aware of. If the `problem_id` is `nil`, that ticket is its own independent ticket that does not represent an incident of another ticket.
 
 ## Your Task
 
