@@ -3,6 +3,29 @@ require 'rails_helper'
 RSpec.describe TicketsController, type: :controller do
   let(:account){ Account.create!(slug: 'default') }
 
+  describe 'The test the interview candidate needs to complete' do
+    describe "GET #related" do
+      let!(:ticket)           { account.tickets.create! }
+      let!(:related_ticket)   { "add a related ticket" }
+      let!(:unrelated_ticket) { "add an unrelated ticket" }
+
+      it "responds successfully with an HTTP 200 status code" do
+        get :related, id: ticket.id
+        expect(response).to be_success
+        expect(response).to have_http_status(200)
+      end
+
+      it "loads related ticket" do
+        get :related, id: ticket.id
+
+        json_response = JSON.parse(response.body)
+
+        expect(json_response.first['id'].to_i).to eq related_ticket.id
+        expect(json_response.size).to eq 1
+      end
+    end
+  end
+
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code" do
       get :index
