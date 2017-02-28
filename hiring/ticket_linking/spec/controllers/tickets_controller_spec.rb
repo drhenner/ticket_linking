@@ -8,6 +8,7 @@ RSpec.describe TicketsController, type: :controller do
       let!(:ticket)           { account.tickets.create! }
       let!(:related_ticket)   { "add a related ticket" }
       let!(:unrelated_ticket) { "add an unrelated ticket" }
+      let!(:related_ticket2)  { "add a related ticket for a different reason" }
 
       it "responds successfully with an HTTP 200 status code" do
         get :related, id: ticket.id
@@ -20,9 +21,30 @@ RSpec.describe TicketsController, type: :controller do
 
         json_response = JSON.parse(response.body)
 
-        expect(json_response.first['id'].to_i).to eq related_ticket.id
-        expect(json_response.size).to eq 1
+        expect(json_response.map{ |r| r['id'].to_i }).to include related_ticket.id
+        expect(json_response.map{ |r| r['id'].to_i }).to include related_ticket2.id
+        expect(json_response.size).to eq 2
       end
+
+      # describe "You can optionally add this functionality" do
+      #   it "loads related ticket for reason one" do
+      #     get :related, id: ticket.id, reason: '???'
+      #
+      #     json_response = JSON.parse(response.body)
+      #
+      #     expect(json_response.map{ |r| r['id'].to_i }).to include related_ticket.id
+      #     expect(json_response.size).to eq 1
+      #   end
+      #
+      #   it "loads related ticket for reason two" do
+      #     get :related, id: ticket.id, reason: '???'
+      #
+      #     json_response = JSON.parse(response.body)
+      #
+      #     expect(json_response.map{ |r| r['id'].to_i }).to include related_ticket2.id
+      #     expect(json_response.size).to eq 1
+      #   end
+      # end
     end
   end
 

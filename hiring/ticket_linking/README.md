@@ -24,29 +24,54 @@ This ticket to ticket relationship is currently accomplished using a `problem_id
 
 ## Your Task
 
-#### Expectation
-
-Your aim is to complete a simple solution.  (readability is just as important as functional)
-
-It is expected you may do some but maybe not all of the following:
-
-* Refactor the existing data model
-* Add as many methods needed to support the functionality
-* Add new controllers and/or endpoints to retrieve the related tickets
-* Add a Description of how you might refactor your code or the code in the test
-
 #### Specifications
 
 Implement a more generic solution for linking tickets. A ticket should be able to be related to any number of other tickets for any arbitrary reason.
 
 In the new system, a ticket has and belongs to many other related tickets. You should be able to call `ticket.related` and get an array of tickets which are related to this ticket. This could be incidents of a problem. This could be tickets that arose by solving another ticket. It could be additional tickets pertaining to one aspect of another ticket. Regardless of the reason, we want a system that can allow for us to associate any number of tickets together in a meaningful way.
 
+#### Example of the relations needed between tickets
+
+```shell
+
+#  ----------------                 ---------------
+#  |  Ticket 1    |                 |  Ticket 2   |
+#  |              |  is related to  |  Ticket 3   | because of reason ABC
+#  |              |                 ---------------
+#  ----------------
+#
+#  also
+#
+#  ----------------                 ---------------
+#  |  Ticket 1    |                 |  Ticket 2   |
+#  |              |  is related to  |  Ticket 4   |  because of reason XYZ
+#  |              |                 |             |
+#  ----------------                 ---------------
+#
+#  and for a completely different reason
+#
+#  ----------------                 ---------------
+#  |  Ticket 2    |                 |  Ticket 3   |
+#  |              |  is related to  |  Ticket 4   |  because of reason 123
+#  |              |                 |             |
+#  ----------------                 ---------------
+
+```
+
+#### Expectation
+
+Your aim is to complete a simple solution.  (readability is just as important as functional)
+
+Please use any means necessary to implement your preferred approach.
+
 #### Acceptance Criteria
 
 - A single ticket should be able to be related to multiple other tickets as well as have multiple other tickets related to it.
 - The `Ticket` model should have meaningful associations that efficiently return related tickets.
 - Add a route to the API for `/api/v1/tickets/:id/related.json`. This route returns the array of related tickets.
-- Complete the incomplete tests in `/spec/controllers/tickets_controller_spec.rb`
+- You are done when these tests pass: `/spec/controllers/tickets_controller_spec.rb`
+
+Please add a description of how you might refactor your code or the existing code.
 
 ## Example
 
